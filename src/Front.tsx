@@ -9,6 +9,7 @@ import Slide1 from './assets/IMG_9482_1.jpg'
 import Slide2 from './assets/IMG_9414.jpg'
 import Slide3 from './assets/IMG_9383_1.jpg'
 
+
 function Front() {
     const newstext = "Nach dem Einmarsch Russlands in die Ukraine im Februar 2022 gerieten hunderte russisch-orthodoxer Priester in Schwierigkeiten, weil sie sich gegen die Haltung der russischen Behörden und die anderer Kirchenvertreter stellten, berichten Menschenrechtsaktivisten.Einige von ihnen flohen aus Angst vor Verfolgung aus dem Land oder wurden durch die von Moskau kontrollierte Russisch-Orthodoxe Kirche von der Ausübung ihres Priesteramts ausgeschlossen. Andere wurden wegen ihrer Äußerungen gegen Russlands Krieg in der Ukraine verhaftet und eingesperrt."
     const slideImages: string[] = [Slide1, Slide2, Slide3]

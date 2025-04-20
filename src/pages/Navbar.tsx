@@ -1,5 +1,6 @@
 import { MdLanguage, MdKeyboardArrowDown } from "react-icons/md";
 import MirkatLogo from '../assets/MIRKAT_Logo-01.png'
+import { Link } from 'react-router-dom';
 
 function Navbar () {
 
@@ -16,6 +17,10 @@ function Navbar () {
             <button className="logo-button">
                 <img src={MirkatLogo} alt="Logo MIRKAT" className="mirkat-logo"/>
             </button>
+	   <Link to="/about" className="who-are-we-button">
+  		<h4>¿Quiénes somos?</h4>
+	   </Link>
+	
             <button className="who-are-we-button">
                 <h4>¿Quiénes somos?</h4>
             </button>

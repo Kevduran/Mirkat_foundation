@@ -1,12 +1,15 @@
-import Front from "./Front"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Front from './Front'
+import AboutUs from './AboutUs'
 
 function App() {
-
-
   return (
-    <>
-      <Front/>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Front />} />
+        <Route path="/about" element={<AboutUs />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
