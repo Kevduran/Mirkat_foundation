@@ -1,29 +1,89 @@
 import './Front.css'
 import placeholder from './assets/placeholder.png'
-import newsimg from './assets/IMG_9348_1.jpg'
 import Navbar from './pages/Navbar'
 import Slideshow from './pages/Slideshow'
 import Testimonials from './pages/Testimonials'
 import EndPage from './pages/EndPage'
-import Slide1 from './assets/IMG_9482_1.jpg'
-import Slide2 from './assets/IMG_9414.jpg'
-import Slide3 from './assets/IMG_9383_1.jpg'
+import LoadingPage from './utils/loadingPage'
+import { useEffect, useState } from 'react';
+import { Banner } from './interfaces/banner'
+
+interface NewsInterface {
+    title: string,
+    content: string,
+    date: number,
+    image_path: string,
+}
 
 function Front() {
-    const newstext = "Nach dem Einmarsch Russlands in die Ukraine im Februar 2022 gerieten hunderte russisch-orthodoxer Priester in Schwierigkeiten, weil sie sich gegen die Haltung der russischen Behörden und die anderer Kirchenvertreter stellten, berichten Menschenrechtsaktivisten.Einige von ihnen flohen aus Angst vor Verfolgung aus dem Land oder wurden durch die von Moskau kontrollierte Russisch-Orthodoxe Kirche von der Ausübung ihres Priesteramts ausgeschlossen. Andere wurden wegen ihrer Äußerungen gegen Russlands Krieg in der Ukraine verhaftet und eingesperrt."
-    const slideImages: string[] = [Slide1, Slide2, Slide3]
+    const [slideImages, setSlideImages] = useState<Banner[] | null>(null);
+    const [news, setNews] = useState<NewsInterface[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
+    useEffect(() => {
+
+        const fetchEverything = async () => {
+            try {
+                // Fetching banners
+                const response = await fetch("http://localhost:3000/banner/get/all", {
+                    method: "GET",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                });
+                const data = await response.json();
+                const transformedData = await data.map((banner: any) => ({
+                    id: banner.id,
+                    image_path: banner.image_path.replace(/\\/g, '/'),
+                }));
+                setSlideImages(transformedData);
+                console.log(slideImages);
+
+                
+                // Fetching news
+                const response2 = await fetch(`http://localhost:3000/news/get?limit=${5}&offset=${0}`, {
+                    method: "GET",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                });
+                const data2 = await response2.json();
+                const transformedData2 = await data2.map((newsItem: any) => ({
+                    title: newsItem.title,
+                    content: newsItem.content,
+                    date: newsItem.created_at,
+                    image_path: newsItem.image_path.replace(/\\/g, '/'),
+                }));
+                setNews(transformedData2);
+
+            } catch (error: any) {
+                console.error("Error fetching data:", error.message);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchEverything();
+    }, []);
+
+    const timeConverter = (timestamp: number) => {
+        const date = new Date(timestamp * 1000);
+        return date.toLocaleString();
+    }
+
+    if (loading) {
+        return <LoadingPage />;
+    }
 
 
     return (
         <>
         <Navbar/>
-        <Slideshow slides={slideImages} />
+        {slideImages && <Slideshow slides={slideImages}/>}
         <div className="numbers-section">
 
         
         {[...Array(3)].map((_, index) => (
-        <section className='numbers-element'>
+        <section className='numbers-element' key={index}>
             <img src={placeholder} className='numbers-img'/>
             <h1 className='numbers-number'>50</h1>
             <p className='numbers-description'>Was mich nicht umbringt, macht mich stärker.</p>
@@ -36,14 +96,17 @@ function Front() {
             <h4 className='news-name-desc'>Conoce más a fondo nuestras acciones</h4>
             <section className='news-content'>
 
-            {[...Array(4)].map((_, index) => (
-                <section className='news-item'>
-                <img src={newsimg} className='news-img'/>
-                <h2 className='news-title'>Lorem Ipsum</h2>
-                <h6 className='news-date'>Dec 1 2024</h6>
-                <p className='news-text'>{newstext}</p>
+            {news.map((news: NewsInterface, index: number) => {
+
+                return (
+                <section className='news-item' key={index}>
+                <img src={`http://localhost:3000/${news.image_path}`} className='news-img'/>
+                <h2 className='news-title'>{news.title}</h2>
+                <h6 className='news-date'>{timeConverter(news.date)}</h6>
+                <p className='news-text'>{news.content}</p>
                 </section>
-            ))}
+                )
+                })}
                 
             </section>
 

@@ -1,0 +1,121 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./fonts/Montserrat-Regular.ttf') format('truetype');
+}
+
+.logout-button {
+    background-color: rgb(185, 0, 0);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    font-family: 'Montserrat';
+    cursor: pointer;
+    border: none;
+    margin-right: 1rem;
+}
+
+.logout-button:hover {
+    outline: 3px solid rgb(240, 99, 117);
+    transition: ease-in-out 0.3s;
+}
+
+.admin-titles {
+    font-family: 'Montserrat';
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+    text-decoration: underline;
+}
+
+.file-input {
+    padding: 0.5rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Montserrat';
+}
+
+.upload-button {
+    background-color: rgb(96, 76, 158);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    font-family: 'Montserrat';
+    cursor: pointer;
+    border: none;
+}
+
+.upload-button:hover {
+    outline: 3px solid rgb(240, 99, 117);
+    transition: ease-in-out 0.3s;
+}
+
+.banners-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+}
+
+.banner-card {
+    width: 25%;
+    padding: 0.4rem;
+    background-color: rgb(146, 124, 180);
+}
+
+.banner-image {
+    width: 100%;
+    height: 15rem;
+}
+
+.delete-button {
+    background-color: rgb(185, 0, 0);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-family: 'Montserrat';
+    cursor: pointer;
+    border: none;
+}
+
+.delete-button:hover {
+    outline: 3px solid rgb(240, 99, 117);
+    transition: ease-in-out 0.3s;
+}
+
+.news-container {
+    margin-top: 4rem;
+    border-top: 12px double rgba(0, 0, 0, 1);
+}
+
+.news-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.news-input {
+    border: 0.2rem solid;
+    border-radius: 1rem;
+    height: 1.5rem;
+
+}
+
+.news-textarea {
+    border: 0.2rem solid;
+    height: 12rem;
+}
+
+
+
+

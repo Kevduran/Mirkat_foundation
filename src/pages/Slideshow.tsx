@@ -1,6 +1,11 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect, SetStateAction } from 'react';
+import { Banner } from '../interfaces/banner';
 
-function Slideshow ({ slides }) {
+interface SlideshowProps {
+    slides: Banner[]
+}
+
+function Slideshow ({ slides }: SlideshowProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const nextSlide = () => {
@@ -16,11 +21,12 @@ function Slideshow ({ slides }) {
     return (
         <>
         <div className='slideshow-container'>
-            {slides.map((slide: string, index: number) => (
+            {slides.map((slide: Banner, index: number) => (
+                console.log(slide.image_path),
                 <div 
                     key={index}
                     className={`slide ${index === currentIndex ? 'active' : ''}`}
-                    style={{ backgroundImage: `url(${slide})` }}
+                    style={{ backgroundImage: `url('http://localhost:3000/${slide.image_path}')` }}
                 />
             ))}
             <button className='next-prev-button' onClick={nextSlide}>Next</button>
