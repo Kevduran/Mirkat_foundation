@@ -1,0 +1,69 @@
+.detalle-page {
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 0; 
+  margin: 0;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+  
+  .detalle-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .detalle-imagen {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .detalle-titulo {
+    font-family: 'Bequind';
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: rgb(96, 76, 158);
+  }
+  
+  .detalle-subtitulo {
+    font-size: 1.5rem;
+    color: #444;
+    margin-bottom: 2rem;
+  }
+  
+  .detalle-cuerpo {
+    font-size: 1.2rem;
+    color: #555;
+    white-space: pre-line;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  
+  .detalle-volver {
+    background-color: rgb(96, 76, 158);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .detalle-volver:hover {
+    background-color: rgb(75, 58, 128);
+  }
+  
+  .news-img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;       /* mantiene la proporción */
+    background-color: #ddd;    /* fondo gris para zonas vacías */
+    display: block;
+  }
+  

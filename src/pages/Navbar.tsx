@@ -21,9 +21,6 @@ function Navbar () {
   		<h4>¿Quiénes somos?</h4>
 	   </Link>
 	
-            <button className="who-are-we-button">
-                <h4>¿Quiénes somos?</h4>
-            </button>
             <button className="how-can-you-help-button">
                 <h4>¿Cómo ayudar?</h4>
                 <MdKeyboardArrowDown size={32}/>
