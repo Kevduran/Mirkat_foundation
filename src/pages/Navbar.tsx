@@ -1,11 +1,21 @@
 import { MdLanguage, MdKeyboardArrowDown } from "react-icons/md";
 import MirkatLogo from '../assets/MIRKAT_Logo-01.png'
+import { redirect, useNavigate } from "react-router-dom";
 
 function Navbar () {
+
+    let navigate = useNavigate();
+
+    const loginHandler = () : void => {
+        navigate('/login')
+    }
 
     return (
         <>
         <section className="upper-nav">
+            <button className="login-button" onClick={loginHandler}>
+                Iniciar sesión
+            </button>
             <button className="language-button">
                 <MdLanguage size={28}/>
                 <h4>Idioma</h4>
@@ -13,7 +23,7 @@ function Navbar () {
             </button>
         </section>
         <section className="nav">
-            <button className="logo-button">
+            <button className="logo-button" onClick={() => navigate('/')}>
                 <img src={MirkatLogo} alt="Logo MIRKAT" className="mirkat-logo"/>
             </button>
             <button className="who-are-we-button">

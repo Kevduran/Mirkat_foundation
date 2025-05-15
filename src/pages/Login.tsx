@@ -3,12 +3,15 @@ import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router";
 import { validateToken } from '../utils/authValidation';
+import PopupMessage from '../utils/PopupMessage';
 
 function Login() {
     const [identifier, setIdentifier] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [token, setToken] = useState<string | null>(null);
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false);
+    const [message, setMessage] = useState<string>('');
 
     let navigate = useNavigate();
 
@@ -24,6 +27,14 @@ function Login() {
 
     }, []);
 
+    const showPopup = (message: string ) : void => {
+        setMessage(message);
+        setIsPopupVisible(true);
+        setTimeout(() => {
+          setIsPopupVisible(false);
+        }, 3000);
+      }
+
 
     const handleIdentifierChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIdentifier(event.target.value);
@@ -37,7 +48,7 @@ function Login() {
         event.preventDefault();
 
         if (!identifier || !password) {
-            alert('Por favor, completa todos los campos.');
+            showPopup('Por favor, completa todos los campos.');
             return;
         }
 
@@ -62,8 +73,12 @@ function Login() {
           setToken(token);
 
         if (res.status === 200) {
-            alert('Inicio de sesión exitoso!');
-            navigate("/admin");
+            showPopup('Inicio de sesión exitoso! Redigiriendo...');
+            setTimeout(() => {
+                navigate("/admin");
+            }, 3000);
+        } else {
+            showPopup('Hay un error en el inicio de sesión');
         }
           
         
@@ -74,6 +89,11 @@ function Login() {
         <>
         <div className='upper-nav'>
         </div>
+        <PopupMessage 
+        message={message} 
+        isVisible={isPopupVisible}
+        onClose={() => setIsPopupVisible(false)} 
+        duration={3000}/>
         <div className='login-container'>
             <div className='login-form'>
                 <h1 className='login-text'>Iniciar sesión</h1>

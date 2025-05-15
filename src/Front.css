@@ -40,6 +40,24 @@
     cursor: pointer;
 }
 
+.login-button {
+    margin-right: 1rem;
+    font-family: 'Montserrat';
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    border: none;
+    height: 2rem;
+    margin-bottom: 2rem;
+    background: none;
+    color: rgb(245, 183, 24);
+    cursor: pointer;
+}
+
+.login-button:hover {
+    animation: ease-in 1s;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 .logo-button{
     background: none;
     border: none;
@@ -90,12 +108,15 @@
     position: absolute;
     background-size: cover;
     background-position: center;
-    transition: opacity 0.5s ease;
-    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
-.slide.active {
+.fade-in {
     opacity: 1;
+}
+
+.fade-out {
+    opacity: 0;
 }
 
 .numbers-section  {
@@ -163,9 +184,11 @@
 .news-item {
     margin: 3rem;
     width: 400px;
-    box-shadow: 0px 0px 10px 2px gray;
+    max-height: 42rem;
+    box-shadow: 0px 0px 10px 2px rgb(128, 128, 128);
     padding-bottom: 2rem;
     font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
 }
 
 .news-img {
@@ -188,11 +211,22 @@
     margin-bottom: 0;
 }
 
+.news-text-container {
+    max-height: 44%;
+    overflow: hidden;
+}
+
 .news-text {
     margin-top: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
+}
+
+.news-text-truncate {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-top: 0.2rem;
 }
 
 .testimonials {

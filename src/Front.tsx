@@ -7,8 +7,11 @@ import EndPage from './pages/EndPage'
 import LoadingPage from './utils/loadingPage'
 import { useEffect, useState } from 'react';
 import { Banner } from './interfaces/banner'
+import LoadingSpinner from './utils/loadingSpinner'
+import { useNavigate } from 'react-router-dom'
 
 interface NewsInterface {
+    id: number,
     title: string,
     content: string,
     date: number,
@@ -16,32 +19,35 @@ interface NewsInterface {
 }
 
 function Front() {
-    const [slideImages, setSlideImages] = useState<Banner[] | null>(null);
+    const [slideImages, setSlideImages] = useState<Banner[]>([]);
     const [news, setNews] = useState<NewsInterface[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+
+    const redirect = useNavigate();
+    const baseURL = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
 
         const fetchEverything = async () => {
             try {
                 // Fetching banners
-                const response = await fetch("http://localhost:3000/banner/get/all", {
+                const response = await fetch(`${baseURL}/banner/get/all`, {
                     method: "GET",
                     headers: {
                         "content-type": "application/json",
                     },
                 });
                 const data = await response.json();
-                const transformedData = await data.map((banner: any) => ({
+                const transformedData : Banner[] = data.map((banner: any) => ({
                     id: banner.id,
                     image_path: banner.image_path.replace(/\\/g, '/'),
+                    news_id: banner.id_news
                 }));
                 setSlideImages(transformedData);
-                console.log(slideImages);
 
                 
                 // Fetching news
-                const response2 = await fetch(`http://localhost:3000/news/get?limit=${5}&offset=${0}`, {
+                const response2 = await fetch(`${baseURL}/news/get?limit=${5}&offset=${0}`, {
                     method: "GET",
                     headers: {
                         "content-type": "application/json",
@@ -49,6 +55,7 @@ function Front() {
                 });
                 const data2 = await response2.json();
                 const transformedData2 = await data2.map((newsItem: any) => ({
+                    id: newsItem.id,
                     title: newsItem.title,
                     content: newsItem.content,
                     date: newsItem.created_at,
@@ -78,7 +85,7 @@ function Front() {
     return (
         <>
         <Navbar/>
-        {slideImages && <Slideshow slides={slideImages}/>}
+        {!slideImages.length ? <LoadingSpinner/> : <Slideshow slides={slideImages}/>}
         <div className="numbers-section">
 
         
@@ -99,11 +106,18 @@ function Front() {
             {news.map((news: NewsInterface, index: number) => {
 
                 return (
-                <section className='news-item' key={index}>
-                <img src={`http://localhost:3000/${news.image_path}`} className='news-img'/>
+                <section className='news-item' key={index} onClick={() => redirect(`/news/${news.id}`)}>
+                <img src={`${baseURL}/${news.image_path}`} className='news-img'/>
                 <h2 className='news-title'>{news.title}</h2>
                 <h6 className='news-date'>{timeConverter(news.date)}</h6>
-                <p className='news-text'>{news.content}</p>
+                <section className='news-text-container'>
+                {news.content
+                .split('/n/n')
+                .map((paragraph, index) => (
+                <p key={index} className="news-text">{paragraph}</p>
+                ))}
+                </section>
+                <p className='news-text-truncate'>...</p>
                 </section>
                 )
                 })}

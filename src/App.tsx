@@ -3,8 +3,8 @@ import Front from "./Front"
 import Login from './pages/Login'
 import AdminPage from './pages/AdminPage'
 import NotAuthorized from './pages/NotAuthorized';
-import LoadingPage from './utils/loadingPage';
 import {Routes, Route} from "react-router-dom"
+import NewDetails from "./pages/NewDetails";
 
 function App() {
 
@@ -16,7 +16,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/admin" element={<AdminPage />} />
       <Route path="/not-authorized" element={<NotAuthorized />} />
-      <Route path="/loading" element={<LoadingPage />} />
+      <Route path="/news/:id" element={<NewDetails />} />
 
       {/* Puedes agregar más rutas aquí */}
     </Routes>

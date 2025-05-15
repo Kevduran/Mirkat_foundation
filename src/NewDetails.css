@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Bequind';
+    src: url('./fonts/BEQUIND.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./fonts/Montserrat-Regular.ttf') format('truetype');
+}
+
+
+@media (min-width: 480px) {
+    .news-details-container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .news-title-main {
+        font-family: 'Bequind';
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 0;
+        margin-left: 1rem;
+    }
+    
+    .news-date-main {
+        font-family: 'Montserrat';
+        margin-top: 0.2rem;
+        font-size: 1rem;
+        margin-left: 1rem;
+    }
+
+    .news-image-main {
+        width: 100%;
+    }
+
+    .news-text-main {
+        font-family: 'Montserrat';
+        line-height: 1.6;
+        
+    }
+
+}
+
+@media(min-width: 1024px) {
+    .news-details-container {
+        margin-left: 10%;
+        margin-right: 30%;
+    }
+
+    .news-title-main {
+        margin-left: 0;
+    }
+    
+    .news-date-main {
+        margin-left: 0;
+    }
+}
+
