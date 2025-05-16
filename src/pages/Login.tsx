@@ -9,7 +9,6 @@ function Login() {
     const [identifier, setIdentifier] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [token, setToken] = useState<string | null>(null);
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false);
     const [message, setMessage] = useState<string>('');
 
@@ -18,7 +17,6 @@ function Login() {
     useEffect(() => {
         const verify = async () => {
             const result = await validateToken();
-            setIsLoggedIn(result);
             if (result) {
                 navigate("/admin");
             }

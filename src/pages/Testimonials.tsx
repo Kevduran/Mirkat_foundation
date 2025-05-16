@@ -1,6 +1,5 @@
-import { MdPeople } from "react-icons/md";
+
 import { FaQuoteLeft } from "react-icons/fa";
-import MIRKATStar from "../assets/MIRKAT_Elementos de marca-07.png"
 
 function Testimonials() {
     const testimonialData = [

@@ -1,7 +1,5 @@
-import React from 'react';
 import Navbar from './pages/Navbar';
 import EndPage from './pages/EndPage';
-import { BsDisplay } from 'react-icons/bs';
 
 const AboutUs = () => {
   return (

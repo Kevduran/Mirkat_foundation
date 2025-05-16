@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState, useEffect, useCallback } from 'react';
+import { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import LoadingSpinner from '../utils/loadingSpinner';

@@ -1,5 +1,4 @@
 import './Front.css'
-import placeholder from './assets/placeholder.png'
 import Navbar from './pages/Navbar'
 import Slideshow from './pages/Slideshow'
 import Testimonials from './pages/Testimonials'
