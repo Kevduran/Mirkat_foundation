@@ -21,11 +21,13 @@
         font-weight: bold;
         margin-bottom: 0;
         margin-left: 1rem;
+        color: rgb(96, 76, 158);;
     }
     
     .news-date-main {
         font-family: 'Montserrat';
         margin-top: 0.2rem;
+        color: rgb(64, 64, 64);
         font-size: 1rem;
         margin-left: 1rem;
     }

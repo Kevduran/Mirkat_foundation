@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
+import EndPage from "./EndPage";
 import LoadingSpinner from "../utils/loadingSpinner";
 import '../NewDetails.css'
 
@@ -78,6 +79,7 @@ function NewDetails() {
         ))}
         
     </div> }
+    <EndPage />
 
     </>
   );

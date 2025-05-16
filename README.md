@@ -48,3 +48,6 @@ export default tseslint.config({
   },
 })
 ```
+
+## .ENV FILE FOR DEPLOYING
+VITE_API_BASE_URL=YOUR API URL

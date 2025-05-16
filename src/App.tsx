@@ -5,6 +5,7 @@ import AdminPage from './pages/AdminPage'
 import NotAuthorized from './pages/NotAuthorized';
 import {Routes, Route} from "react-router-dom"
 import NewDetails from "./pages/NewDetails";
+import AboutUs from './AboutUs';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Route path="/admin" element={<AdminPage />} />
       <Route path="/not-authorized" element={<NotAuthorized />} />
       <Route path="/news/:id" element={<NewDetails />} />
+      <Route path="/about" element={<AboutUs />} />
 
       {/* Puedes agregar más rutas aquí */}
     </Routes>
