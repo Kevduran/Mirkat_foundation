@@ -14,6 +14,8 @@ function Login() {
 
     let navigate = useNavigate();
 
+    const baseURL = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
         const verify = async () => {
             const result = await validateToken();
@@ -50,7 +52,7 @@ function Login() {
             return;
         }
 
-        const res = await fetch("http://localhost:3000/auth/login", {
+        const res = await fetch(`${baseURL}/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
