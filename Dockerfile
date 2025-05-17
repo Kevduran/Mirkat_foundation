@@ -3,8 +3,12 @@ FROM node:23-alpine AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
-RUN npm i -g serve
 COPY . .
-RUN npm run build
+RUN npm run Build
+
+# Production stage
+FROM nginx:stable-alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
-CMD ["serve", "-s", "dist"]
+CMD ["nginx", "-g", "daemon off;"]
