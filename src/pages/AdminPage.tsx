@@ -55,7 +55,6 @@ function AdminPage() {
     bannersData.forEach((banner: any) => {
       setBanners((prevBanners) => [...prevBanners, { id: banner.id, image_path: banner.image_path.replace(/\\/g, '/'), news_id: banner.id_news }]);
     });
-    console.log(bannersData);
     setIsLoadingSpinner(false);
 
   }, []);
@@ -124,8 +123,6 @@ function AdminPage() {
     const data: any = await res.json();
 
       // Add id of the news to the banner
-      console.log(data.id);
-      console.log(newsId);
       const res2 = await fetch(`${baseURL}/banner/add/id`, {
         method: "POST",
         headers: {
@@ -138,7 +135,6 @@ function AdminPage() {
         })
       });
       const data2: any = await res2.json();
-      console.log(data2);
 
       if (data2.error === 'News not found') {
         showPopup('ID de la noticia no encontrada, no se añadio el banner');

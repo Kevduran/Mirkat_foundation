@@ -226,7 +226,7 @@ function News({setIsLoading, showPopup} : newsProps) {
             return (
             <section className='news-item-admin' key={index}>
             <h1 className='news-title-admin'> ID: {news.id}</h1>
-            <img src={`http://localhost:3000/${news.image_path}`} className='news-img'/>
+            <img src={`${baseURL}/${news.image_path}`} className='news-img'/>
             <h2 className='news-title-admin'>{news.title}</h2>
             <h6 className='news-date-admin'>{timeConverter(news.date)}</h6>
             <section className='news-text-admin-container'>
