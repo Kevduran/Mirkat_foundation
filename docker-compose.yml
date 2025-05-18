@@ -20,3 +20,6 @@ services:
     container_name: backend
     ports:
       - "3000:3000"
+    volumes:
+      - ../api/images:/app/images
+      - ../api/images-news:/app/images-news

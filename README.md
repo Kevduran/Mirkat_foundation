@@ -1,53 +1,23 @@
-# React + TypeScript + Vite
+# Guia de instalacion
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## .ENV
+Para que el cliente se comunique con el server, se necesita crear un .env dentro del cliente y otro en el server
 
-Currently, two official plugins are available:
+### Para el cliente
+> VITE_API_BASE_URL=/api/
+**Si se cambia la configuracion de Nginx en la ruta relativa del proxy (en location) cambiar debidamente esta variable al correcto, sino dejarlo asi**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Para el server
+JWT_KEY= Tu key para JWT
+DB_NAME= Nombre del DB (dentro de la carpeta db)
+**La base de datos trabaja en sqlite**
 
-## Expanding the ESLint configuration
+## Docker
+Luego de haber creado los .env, recordar renombrar la carpeta que contiene al servidor como **api**, luego entrar en la carpeta del cliente y ejecutar:
+> docker compose up -d
+Para levantar ambas instancias de cliente y servidor
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
-
-## .ENV FILE FOR DEPLOYING
-VITE_API_BASE_URL=YOUR API URL
+# Notas
+- La aplicacion trabaja con certificados firmados por sí mismo, por ello aunque esté en https, sigue siendo inseguro
+- La aplicación todavía no tiene dominio, por lo que usa la IP pública del servidor
+> Para cambiar el certificado y los nombres de dominio, estos se deben modificar en **nginx.conf** y el **Dockerfile** que estan dentro del cliente
