@@ -140,9 +140,8 @@ function News({setIsLoading, showPopup} : newsProps) {
         });
 
         const data: any = await res.json();
-        console.log(data);
 
-        const res2 = await fetch(`${baseURL}news/add`, {
+        await fetch(`${baseURL}news/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -154,7 +153,7 @@ function News({setIsLoading, showPopup} : newsProps) {
                 'id': data.id,
             }),
         });
-        const data2: any = await res2.json();
+        
         setText('');
         setTitle('');
         setFile(null);
