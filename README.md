@@ -1,4 +1,4 @@
-[Mirkat-API-DB](KevinC911/Mirkat-API-DB)
+[Link al repo con el backend](https://github.com/KevinC911/Mirkat-API-DB)
 
 # Guia de instalacion
 
