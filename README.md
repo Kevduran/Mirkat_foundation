@@ -12,9 +12,12 @@ Para que el cliente se comunique con el server, se necesita crear un .env dentro
 > **Si se cambia la configuracion de Nginx en la ruta relativa del proxy (en location) cambiar debidamente esta variable al correcto, sino dejarlo asi**
 
 ### Para el server
-JWT_KEY= Tu key para JWT
-DB_NAME= Nombre del DB (dentro de la carpeta db)
-**La base de datos trabaja en sqlite**
+
+> JWT_KEY= Tu key para JWT
+
+> DB_NAME= Nombre del DB (dentro de la carpeta db)
+
+> **La base de datos trabaja en sqlite**
 
 ## Docker
 Luego de haber creado los .env, recordar renombrar la carpeta que contiene al servidor como **api**, luego entrar en la carpeta del cliente y ejecutar:
