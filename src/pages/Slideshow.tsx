@@ -39,12 +39,12 @@ function Slideshow ({ slides }: SlideshowProps) {
                 <div>
                     {currentItem?.news_id ? ( <div 
                     className={`slide ${fade ? 'fade-in' : 'fade-out'}`}
-                    style={{ backgroundImage: `url(${baseURL}/${currentItem?.image_path})`, cursor: 'pointer' }}
+                    style={{ backgroundImage: `url(${baseURL}${currentItem?.image_path})`, cursor: 'pointer' }}
                     onClick={() => navigate(`/news/${currentItem.news_id}`)}/> )
                     : 
                     (<div 
                     className={`slide ${fade ? 'fade-in' : 'fade-out'}`}
-                    style={{ backgroundImage: `url(${baseURL}/${currentItem?.image_path})` }}/>)
+                    style={{ backgroundImage: `url(${baseURL}${currentItem?.image_path})` }}/>)
                     }
                     
                 </div>

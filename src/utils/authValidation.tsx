@@ -10,7 +10,7 @@ export async function validateToken(): Promise<boolean> {
         return false;
     }
 
-    const res = await fetch(`${baseURL}/auth/validate`, {
+    const res = await fetch(`${baseURL}auth/validate`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

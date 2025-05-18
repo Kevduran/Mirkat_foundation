@@ -45,7 +45,7 @@ function AdminPage() {
   const fetchBanners = useCallback(async () => {
     setIsLoadingSpinner(true);
     setBanners([]);
-    const bannersRes = await fetch(`${baseURL}/banner/get/all`, {
+    const bannersRes = await fetch(`${baseURL}banner/get/all`, {
       method: "GET",
       headers: {
         "authorization": `${Cookies.get('authToken')}`,
@@ -113,7 +113,7 @@ function AdminPage() {
 
     // Insert the image
     const storedToken = Cookies.get('authToken');
-    const res = await fetch(`${baseURL}/banner/add`, {
+    const res = await fetch(`${baseURL}banner/add`, {
       method: "POST",
       headers: {
         "authorization": `${storedToken}`,
@@ -123,7 +123,7 @@ function AdminPage() {
     const data: any = await res.json();
 
       // Add id of the news to the banner
-      const res2 = await fetch(`${baseURL}/banner/add/id`, {
+      const res2 = await fetch(`${baseURL}banner/add/id`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -160,7 +160,7 @@ function AdminPage() {
     setShowConfirmation(false);
     setIsLoading(true);
     const storedToken = Cookies.get('authToken');
-    const res = await fetch(`${baseURL}/banner/delete/${itemId}`, {
+    const res = await fetch(`${baseURL}banner/delete/${itemId}`, {
       method: "DELETE",
       headers: {
         "authorization": `${storedToken}`,
@@ -221,7 +221,7 @@ function AdminPage() {
         {banners.length === 0 && !isLoadingSpinner ? <p className='no-banners'>No hay banners activos</p> : null}
         {isLoadingSpinner ? <LoadingSpinner /> : banners.map((banner) => (
           <div key={banner.id} className='banner-card'>
-            <img src={`${baseURL}/${banner.image_path}`} alt={`Banner ${banner.id}`} className='banner-image' />
+            <img src={`${baseURL}${banner.image_path}`} alt={`Banner ${banner.id}`} className='banner-image' />
             {banner.news_id ? <h2 className='banner-title'>ID de noticia: {banner.news_id}</h2> : <h2 className='banner-title-none'>Sin noticia asociada</h2>}
             <button className='delete-button' onClick={() => handleDelete(banner.id)}>Eliminar</button>
           </div>

@@ -39,7 +39,7 @@ function News({setIsLoading, showPopup} : newsProps) {
     useEffect(() => {
             setIsLoading2(true);
             const countRes = async () => {
-              const res = await fetch(`${baseURL}/news/get/count`, {
+              const res = await fetch(`${baseURL}news/get/count`, {
                   method: "GET",
                   headers: {
                       "content-type": "application/json",
@@ -58,7 +58,7 @@ function News({setIsLoading, showPopup} : newsProps) {
         const fetchNews = async () => {
             setIsLoadingSpinner(true);
     
-            const newsRes = await fetch(`${baseURL}/news/get?limit=5&offset=${(index * 5)}`, {
+            const newsRes = await fetch(`${baseURL}news/get?limit=5&offset=${(index * 5)}`, {
                 method: "GET",
                 headers: {
                     "content-type": "application/json",
@@ -129,9 +129,8 @@ function News({setIsLoading, showPopup} : newsProps) {
             return;
         };
 
-        console.log(file);
         const storedToken = Cookies.get('authToken');
-        const res = await fetch(`${baseURL}/news/add/image`, {
+        const res = await fetch(`${baseURL}news/add/image`, {
             method: "POST",
             headers: {
                 "authorization": `${storedToken}`,
@@ -143,7 +142,7 @@ function News({setIsLoading, showPopup} : newsProps) {
         const data: any = await res.json();
         console.log(data);
 
-        const res2 = await fetch(`${baseURL}/news/add`, {
+        const res2 = await fetch(`${baseURL}news/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -156,7 +155,6 @@ function News({setIsLoading, showPopup} : newsProps) {
             }),
         });
         const data2: any = await res2.json();
-        console.log(data2);
         setText('');
         setTitle('');
         setFile(null);
@@ -180,7 +178,7 @@ function News({setIsLoading, showPopup} : newsProps) {
         setShowConfirmation(false);
         setIsLoading2(true);
         const storedToken = Cookies.get('authToken');
-        const res = await fetch(`${baseURL}/news/delete/${itemId}`, {
+        const res = await fetch(`${baseURL}news/delete/${itemId}`, {
           method: "DELETE",
           headers: {
             "authorization": `${storedToken}`,
@@ -225,7 +223,7 @@ function News({setIsLoading, showPopup} : newsProps) {
             return (
             <section className='news-item-admin' key={index}>
             <h1 className='news-title-admin'> ID: {news.id}</h1>
-            <img src={`${baseURL}/${news.image_path}`} className='news-img'/>
+            <img src={`${baseURL}${news.image_path}`} className='news-img'/>
             <h2 className='news-title-admin'>{news.title}</h2>
             <h6 className='news-date-admin'>{timeConverter(news.date)}</h6>
             <section className='news-text-admin-container'>

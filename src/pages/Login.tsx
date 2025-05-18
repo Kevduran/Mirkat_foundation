@@ -52,7 +52,7 @@ function Login() {
             return;
         }
 
-        const res = await fetch(`${baseURL}/auth/login`, {
+        const res = await fetch(`${baseURL}auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
