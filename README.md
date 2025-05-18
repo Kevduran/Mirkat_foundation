@@ -6,7 +6,9 @@
 Para que el cliente se comunique con el server, se necesita crear un .env dentro del cliente y otro en el server
 
 ### Para el cliente
+
 > VITE_API_BASE_URL=/api/
+
 > **Si se cambia la configuracion de Nginx en la ruta relativa del proxy (en location) cambiar debidamente esta variable al correcto, sino dejarlo asi**
 
 ### Para el server
