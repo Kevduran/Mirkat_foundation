@@ -3,6 +3,8 @@ FROM node:23-alpine AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
+COPY localhost.crt /etc/nginx/ssl
+COPY localhost.key /etc/nginx/ssl
 COPY . .
 RUN npm run build
 
