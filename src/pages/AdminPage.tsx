@@ -45,7 +45,7 @@ function AdminPage() {
   const fetchBanners = useCallback(async () => {
     setIsLoadingSpinner(true);
     setBanners([]);
-    const bannersRes = await fetch(`${baseURL}/banner/get/all`, {
+    const bannersRes = await fetch(`${baseURL}banner/get/all`, {
       method: "GET",
       headers: {
         "authorization": `${Cookies.get('authToken')}`,
@@ -55,7 +55,6 @@ function AdminPage() {
     bannersData.forEach((banner: any) => {
       setBanners((prevBanners) => [...prevBanners, { id: banner.id, image_path: banner.image_path.replace(/\\/g, '/'), news_id: banner.id_news }]);
     });
-    console.log(bannersData);
     setIsLoadingSpinner(false);
 
   }, []);
@@ -114,7 +113,7 @@ function AdminPage() {
 
     // Insert the image
     const storedToken = Cookies.get('authToken');
-    const res = await fetch(`${baseURL}/banner/add`, {
+    const res = await fetch(`${baseURL}banner/add`, {
       method: "POST",
       headers: {
         "authorization": `${storedToken}`,
@@ -124,9 +123,7 @@ function AdminPage() {
     const data: any = await res.json();
 
       // Add id of the news to the banner
-      console.log(data.id);
-      console.log(newsId);
-      const res2 = await fetch(`${baseURL}/banner/add/id`, {
+      const res2 = await fetch(`${baseURL}banner/add/id`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -138,7 +135,6 @@ function AdminPage() {
         })
       });
       const data2: any = await res2.json();
-      console.log(data2);
 
       if (data2.error === 'News not found') {
         showPopup('ID de la noticia no encontrada, no se añadio el banner');
@@ -164,7 +160,7 @@ function AdminPage() {
     setShowConfirmation(false);
     setIsLoading(true);
     const storedToken = Cookies.get('authToken');
-    const res = await fetch(`${baseURL}/banner/delete/${itemId}`, {
+    const res = await fetch(`${baseURL}banner/delete/${itemId}`, {
       method: "DELETE",
       headers: {
         "authorization": `${storedToken}`,
@@ -225,7 +221,7 @@ function AdminPage() {
         {banners.length === 0 && !isLoadingSpinner ? <p className='no-banners'>No hay banners activos</p> : null}
         {isLoadingSpinner ? <LoadingSpinner /> : banners.map((banner) => (
           <div key={banner.id} className='banner-card'>
-            <img src={`http://localhost:3000/${banner.image_path}`} alt={`Banner ${banner.id}`} className='banner-image' />
+            <img src={`${baseURL}${banner.image_path}`} alt={`Banner ${banner.id}`} className='banner-image' />
             {banner.news_id ? <h2 className='banner-title'>ID de noticia: {banner.news_id}</h2> : <h2 className='banner-title-none'>Sin noticia asociada</h2>}
             <button className='delete-button' onClick={() => handleDelete(banner.id)}>Eliminar</button>
           </div>

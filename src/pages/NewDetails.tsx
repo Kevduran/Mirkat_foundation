@@ -29,7 +29,7 @@ function NewDetails() {
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
-            const res = await fetch(`${baseURL}/news/get/by-id?id=${id}`, {
+            const res = await fetch(`${baseURL}news/get/by-id?id=${id}`, {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json"
@@ -71,7 +71,7 @@ function NewDetails() {
     <div className="news-details-container">
         <h1 className="news-title-main">{news?.title}</h1>
         <h6 className="news-date-main">{timeConverter(news?.date)}</h6>
-        <img src={`${baseURL}/${news?.image_path}`} className="news-image-main"/>
+        <img src={`${baseURL}${news?.image_path}`} className="news-image-main"/>
         {news?.content
         .split('/n/n')
         .map((paragraph, index) => (

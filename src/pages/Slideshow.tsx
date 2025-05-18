@@ -1,4 +1,4 @@
-import { useState, useEffect, SetStateAction } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Banner } from '../interfaces/banner';
 
@@ -13,7 +13,7 @@ function Slideshow ({ slides }: SlideshowProps) {
 
 
     let navigate = useNavigate();
-    const baseURL = 'http://localhost:3000'
+    const baseURL = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         setCurrentItem(slides[0]);
@@ -24,7 +24,6 @@ function Slideshow ({ slides }: SlideshowProps) {
         const nextIndex = (currentIndex + 1) % slides.length;
         setCurrentIndex(nextIndex);
         setCurrentItem(slides[currentIndex]);
-        console.log(slides[currentIndex])
         setTimeout(() => setFade(false), 4800);
     }
 
@@ -40,12 +39,12 @@ function Slideshow ({ slides }: SlideshowProps) {
                 <div>
                     {currentItem?.news_id ? ( <div 
                     className={`slide ${fade ? 'fade-in' : 'fade-out'}`}
-                    style={{ backgroundImage: `url(${baseURL}/${currentItem?.image_path})`, cursor: 'pointer' }}
+                    style={{ backgroundImage: `url(${baseURL}${currentItem?.image_path})`, cursor: 'pointer' }}
                     onClick={() => navigate(`/news/${currentItem.news_id}`)}/> )
                     : 
                     (<div 
                     className={`slide ${fade ? 'fade-in' : 'fade-out'}`}
-                    style={{ backgroundImage: `url(${baseURL}/${currentItem?.image_path})` }}/>)
+                    style={{ backgroundImage: `url(${baseURL}${currentItem?.image_path})` }}/>)
                     }
                     
                 </div>

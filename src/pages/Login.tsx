@@ -9,16 +9,16 @@ function Login() {
     const [identifier, setIdentifier] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [token, setToken] = useState<string | null>(null);
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false);
     const [message, setMessage] = useState<string>('');
 
     let navigate = useNavigate();
 
+    const baseURL = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
         const verify = async () => {
             const result = await validateToken();
-            setIsLoggedIn(result);
             if (result) {
                 navigate("/admin");
             }
@@ -52,7 +52,7 @@ function Login() {
             return;
         }
 
-        const res = await fetch("http://localhost:3000/auth/login", {
+        const res = await fetch(`${baseURL}auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

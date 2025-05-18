@@ -1,5 +1,4 @@
 import './Front.css'
-import placeholder from './assets/placeholder.png'
 import Navbar from './pages/Navbar'
 import Slideshow from './pages/Slideshow'
 import Testimonials from './pages/Testimonials'
@@ -45,7 +44,7 @@ function Front() {
         const fetchEverything = async () => {
             try {
                 // Fetching banners
-                const response = await fetch(`${baseURL}/banner/get/all`, {
+                const response = await fetch(`${baseURL}banner/get/all`, {
                     method: "GET",
                     headers: {
                         "content-type": "application/json",
@@ -61,7 +60,7 @@ function Front() {
 
                 
                 // Fetching news
-                const response2 = await fetch(`${baseURL}/news/get?limit=${5}&offset=${0}`, {
+                const response2 = await fetch(`${baseURL}news/get?limit=${5}&offset=${0}`, {
                     method: "GET",
                     headers: {
                         "content-type": "application/json",
@@ -137,7 +136,7 @@ function Front() {
                 return (
                 <section className='news-item' key={index} onClick={() => redirect(`/news/${news.id}`)}
                 style= {{borderTop: `8px solid ${randomColor}`}}>
-                <img src={`${baseURL}/${news.image_path}`} className='news-img'/>
+                <img src={`${baseURL}${news.image_path}`} className='news-img'/>
                 <h2 className='news-title'>{news.title}</h2>
                 <h6 className='news-date'>{timeConverter(news.date)}</h6>
                 <section className='news-text-container'>
