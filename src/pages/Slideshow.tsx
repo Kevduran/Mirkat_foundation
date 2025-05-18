@@ -13,7 +13,7 @@ function Slideshow ({ slides }: SlideshowProps) {
 
 
     let navigate = useNavigate();
-    const baseURL = 'http://localhost:3000'
+    const baseURL = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         setCurrentItem(slides[0]);
@@ -24,7 +24,6 @@ function Slideshow ({ slides }: SlideshowProps) {
         const nextIndex = (currentIndex + 1) % slides.length;
         setCurrentIndex(nextIndex);
         setCurrentItem(slides[currentIndex]);
-        console.log(slides[currentIndex])
         setTimeout(() => setFade(false), 4800);
     }
 

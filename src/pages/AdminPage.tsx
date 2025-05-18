@@ -221,7 +221,7 @@ function AdminPage() {
         {banners.length === 0 && !isLoadingSpinner ? <p className='no-banners'>No hay banners activos</p> : null}
         {isLoadingSpinner ? <LoadingSpinner /> : banners.map((banner) => (
           <div key={banner.id} className='banner-card'>
-            <img src={`http://localhost:3000/${banner.image_path}`} alt={`Banner ${banner.id}`} className='banner-image' />
+            <img src={`${baseURL}/${banner.image_path}`} alt={`Banner ${banner.id}`} className='banner-image' />
             {banner.news_id ? <h2 className='banner-title'>ID de noticia: {banner.news_id}</h2> : <h2 className='banner-title-none'>Sin noticia asociada</h2>}
             <button className='delete-button' onClick={() => handleDelete(banner.id)}>Eliminar</button>
           </div>

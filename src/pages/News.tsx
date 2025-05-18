@@ -46,7 +46,6 @@ function News({setIsLoading, showPopup} : newsProps) {
                   },
               });
               const data = await res.json();
-              console.log(data);
               setNewsCount(Math.ceil(data/5));
               }
               countRes();
