@@ -8,7 +8,7 @@
     src: url('./fonts/Montserrat-Regular.ttf') format('truetype');
 }
 
-.upper-nav {
+.upper-nav-login {
     width: 100%;
     background-color: rgb(96, 76, 158);
     height: 3rem;
@@ -62,7 +62,7 @@
     font-family: 'Montserrat';
 }
 
-.login-button {
+.login-button-login {
     background-color: rgb(96, 76, 158);
     color: white;
     padding: 0.5rem 1rem;

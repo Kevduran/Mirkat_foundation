@@ -8,36 +8,202 @@
     src: url('./fonts/Montserrat-Regular.ttf') format('truetype');
 }
 
-.upper-nav {
+.mobile-nav {
     width: 100%;
+    height: 4rem;
     background-color: rgb(96, 76, 158);
-    height: 3rem;
     display: flex;
-    justify-content: end;
+    flex-direction: row;
     align-items: center;
+}
+
+.mobile-logo-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mobile-mirkat-logo {
+    height: 3rem;
+    width: 6rem;
+}
+
+.side-bar-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 1rem;
+    color: rgb(245, 183, 24);
+}
+
+.side-bar {
+    width: 60%;
+    height: 100%;
+    background-color: rgb(96, 76, 158);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    position: fixed;
+    top: 0;
+    left: -1000px;
+    z-index: 1000;
+    transition: left 0.3s ease-in-out;
+}
+
+.side-bar.open {
+    left: 0;
+}
+
+.upper-nav {
+    background-color: rgb(96, 76, 158);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.logo-button {
+    display: none;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.who-are-we-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat';
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin-left: 1.5rem;
+}
+
+.how-can-you-help-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat';
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+.login-button {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    color: rgb(255, 255, 255);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: "Montserrat";
+    font-size: 1.2rem;
+}
+
+.login-logo {
+    margin-right: 0.5rem;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: rgb(245, 183, 24);
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+.desktop-nav {
+    display: none;
+}
+
+.numbers-section  {
+    font-family: 'Montserrat';
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    background-color: rgb(2, 156, 153);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.numbers-img {
+    width: 60px;
+    height: 60px;
+    filter: invert(73%) sepia(88%) saturate(1625%) hue-rotate(350deg) brightness(106%) contrast(92%);
+}
+
+.numbers-number {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+.numbers-description {
+    margin: 0;
+}
+
+.numbers-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 14rem;
+    margin-left: 0.1rem;
+}
+
+
+/* Responsive Design part */
+@media(min-width: 1024px) {
+
+.desktop-nav {
+    display: block;
+}
+
+.upper-nav {
+    background-color: rgb(96, 76, 158);
+    
+    align-items: center;
+    display: flex;
+    height: 3rem;
+    justify-content: end;
     flex-direction: row;
 }
 
 .nav {
     display: flex;
+    height: 6rem;
     flex-direction: row;
     width: 100%;
 }
+.side-bar {
+    display: none;
+}
 
-.language-button {
-    margin-right: 1rem;
-    font-family: 'Montserrat';
-    font-size: 1.2rem;
-    border-radius: 0.5rem;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    height: 2rem;
-    background: none;
-    color: rgb(245, 183, 24);
-    cursor: pointer;
+.side-bar-button {
+    display: none;
+}
+
+.close-button {
+    display: none;
+}
+
+.mobile-logo-button {
+    display: none;
+}
+
+.mobile-nav {
+    display: none;
 }
 
 .login-button {
@@ -47,7 +213,7 @@
     border-radius: 0.5rem;
     border: none;
     height: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.2rem;
     background: none;
     color: rgb(245, 183, 24);
     cursor: pointer;
@@ -59,6 +225,7 @@
 }
 
 .logo-button{
+    display: block;
     background: none;
     border: none;
     cursor: pointer;
@@ -79,13 +246,15 @@
     font-size: 1.5rem;
     font-weight: bold;
     margin-right: 3rem;
+    color: rgb(0, 0, 0);
+    transition: 0.3s ease-in-out;
+}
+
+.who-are-we-button:hover {
+    color: rgb(245, 183, 24);
 }
 
 .how-can-you-help-button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
     background: none;
     border: none;
     cursor: pointer;
@@ -93,7 +262,38 @@
     font-size: 1.5rem;
     font-weight: bold;
     margin-right: 3rem;
+    color: rgb(0, 0, 0);
+    margin-top: 0;
+    transition: 0.3s ease-in-out;
 }
+
+.how-can-you-help-button:hover {
+    color: rgb(245, 183, 24);
+}
+
+.numbers-img {
+    width: 80px;
+    height: 80px;
+}
+
+.numbers-section  {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.numbers-number {
+    font-size: 2.5rem;
+}
+
+.numbers-element {
+    margin-left: 3rem;
+}
+
+}
+
+/* End of responsive design part */
+
+
 
 .slideshow-container {
     position: relative;
@@ -117,41 +317,6 @@
 
 .fade-out {
     opacity: 0;
-}
-
-.numbers-section  {
-    font-family: 'Montserrat';
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: center;
-    background-color: rgb(2, 156, 153);
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-}
-
-.numbers-img {
-    width: 80px;
-    height: 80px;
-    filter: invert(73%) sepia(88%) saturate(1625%) hue-rotate(350deg) brightness(106%) contrast(92%);
-}
-
-.numbers-number {
-    margin: 0;
-    font-size: 2.5rem;
-}
-
-.numbers-description {
-    margin: 0;
-}
-
-.numbers-element {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 14rem;
-    margin-left: 3rem;
 }
 
 .news-section {

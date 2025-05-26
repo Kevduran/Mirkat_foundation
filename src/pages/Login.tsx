@@ -87,7 +87,7 @@ function Login() {
 
     return (
         <>
-        <div className='upper-nav'>
+        <div className='upper-nav-login'>
         </div>
         <PopupMessage 
         message={message} 
@@ -100,7 +100,7 @@ function Login() {
                 <form className='login-form-class'onSubmit={handleSubmit}>
                     <input className='form-input' type="text" placeholder='Usuario o email' onChange={handleIdentifierChange}/>
                     <input className='form-input' type="password" placeholder='Contraseña' onChange={handlePasswordChange}/>
-                    <button className='login-button' type="submit">Iniciar sesión</button>
+                    <button className='login-button-login' type="submit">Iniciar sesión</button>
                 </form>
                 </div>
         </div>
