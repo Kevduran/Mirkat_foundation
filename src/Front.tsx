@@ -51,7 +51,7 @@ function Front() {
                 const data = await response.json();
                 const transformedData : Banner[] = data.map((banner: any) => ({
                     id: banner.id,
-                    image_path: banner.image_path.replace(/\\/g, '/'),
+                    image_path: banner.image_path,
                     news_id: banner.id_news,
                     title: banner.title
                 }));
@@ -71,7 +71,7 @@ function Front() {
                     title: newsItem.title,
                     content: newsItem.content,
                     date: newsItem.created_at,
-                    image_path: newsItem.image_path.replace(/\\/g, '/'),
+                    image_path: newsItem.image_path,
                 }));
                 setNews(transformedData2);
 
@@ -85,6 +85,10 @@ function Front() {
     const timeConverter = (timestamp: number) => {
         const date = new Date(timestamp * 1000);
         return date.toLocaleString();
+    }
+
+    const safeEncode = (value: string | undefined): string => {
+        return encodeURIComponent(value ?? '');
     }
 
 
@@ -129,7 +133,7 @@ function Front() {
                 return (
                 <section className='news-item' key={index} onClick={() => redirect(`/news/${news.id}`)}
                 style= {{borderTop: `8px solid ${randomColor}`}}>
-                <img src={`${baseURL}${news.image_path}`} className='news-img' loading='lazy'/>
+                <img src={`${baseURL}serve/${safeEncode(news.image_path)}`} className='news-img' loading='lazy'/>
                 <h2 className='news-title'>{news.title}</h2>
                 <h6 className='news-date'>{timeConverter(news.date)}</h6>
                 <section className='news-text-container'>

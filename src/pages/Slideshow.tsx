@@ -8,11 +8,15 @@ interface SlideshowProps {
 
 function Slideshow ({ slides }: SlideshowProps) {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
-    const [currentItem, setCurrentItem] = useState<Banner | null>(null);
+    const [currentItem, setCurrentItem] = useState<Banner>();
     const [fade, setFade] = useState<boolean>(true);
 
     let navigate = useNavigate();
     const baseURL = import.meta.env.VITE_API_BASE_URL;
+
+    const safeEncode = (value: string | undefined): string => {
+        return encodeURIComponent(value ?? '');
+    }
 
     useEffect(() => {
         setCurrentItem(slides[0]);
@@ -58,7 +62,7 @@ function Slideshow ({ slides }: SlideshowProps) {
                 <div>
                     {currentItem?.news_id ? ( <div 
                     className={`slide ${fade ? 'fade-in' : 'fade-out'}`}
-                    style={{ backgroundImage: `url(${baseURL}${currentItem?.image_path})`}}> 
+                    style={{ backgroundImage: `url(${baseURL}serve/${safeEncode(currentItem?.image_path)})`}}> 
 
                         {currentItem?.title ? 
                         <div className="slide-overlay">
@@ -74,7 +78,7 @@ function Slideshow ({ slides }: SlideshowProps) {
                     : 
                     (<div 
                     className={`slide ${fade ? 'fade-in' : 'fade-out'}`}
-                    style={{ backgroundImage: `url(${baseURL}${currentItem?.image_path})` }}>
+                    style={{ backgroundImage: `url(${baseURL}serve/${safeEncode(currentItem?.image_path)})` }}>
 
                         {currentItem?.title ? 
                         <div className="slide-overlay">
