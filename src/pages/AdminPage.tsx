@@ -21,6 +21,7 @@ function AdminPage() {
   const [isPopupVisible, setIsPopupVisible] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   const [newsId, setNewsId] = useState<number>(0);
+  const [title, setTitle] = useState<string>('');
 
   let navigate = useNavigate();
 
@@ -99,6 +100,10 @@ function AdminPage() {
     setNewsId(parseInt(event.target.value));
   }
 
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  }
+
   // Submit de los datos de banners
   const handleSubmit = async () => {
 
@@ -107,6 +112,8 @@ function AdminPage() {
       setFile(null);
       return;
     }
+
+    file.append('title', title);
 
 
     setIsLoading(true);
@@ -211,6 +218,8 @@ function AdminPage() {
 
       <section className='banner-upload-section'>
       <input type="file" className='file-input' onChange={handleUpload}></input>
+      <label className='anotations'>Agregar un titulo al banner si se necesita, sino dejar vacio</label>
+      <input type="text" className='banner-input' placeholder='Titulo' onChange={handleTitleChange}></input>
       <label className='anotations'>Agregar ID de la noticia si se quiere que dicho banner redirija a la noticia</label>
       <input type="text" className='news-input' placeholder='ID de la noticia' onChange={handleNewsIdChange}></input>
       <button onClick={handleSubmit} className='upload-button'>Subir</button>

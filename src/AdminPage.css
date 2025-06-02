@@ -104,6 +104,22 @@
     margin-top: 0.5rem;
 }
 
+.banner-input {
+    border: 0.2rem solid;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+    height: 1.5rem;
+    padding-left: 0.8rem;
+    font-family: 'Montserrat';
+    font-size: 1.2rem;
+}
+
+.banner-input:focus {
+    outline: none;
+    border: 0.2rem solid rgb(240, 99, 117);
+    transition: ease-in-out 0.3s;
+}
+
 .delete-button {
     background-color: rgb(185, 0, 0);
     color: white;

@@ -19,8 +19,7 @@ function App() {
       <Route path="/not-authorized" element={<NotAuthorized />} />
       <Route path="/news/:id" element={<NewDetails />} />
       <Route path="/about" element={<AboutUs />} />
-
-      {/* Puedes agregar más rutas aquí */}
+      
     </Routes>
     
     </>

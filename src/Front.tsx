@@ -3,7 +3,6 @@ import Navbar from './pages/Navbar'
 import Slideshow from './pages/Slideshow'
 import Testimonials from './pages/Testimonials'
 import EndPage from './pages/EndPage'
-import LoadingPage from './utils/loadingPage'
 import { useEffect, useState, useRef } from 'react';
 import { Banner } from './interfaces/banner'
 import LoadingSpinner from './utils/loadingSpinner'
@@ -21,7 +20,6 @@ interface NewsInterface {
 function Front() {
     const [slideImages, setSlideImages] = useState<Banner[]>([]);
     const [news, setNews] = useState<NewsInterface[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
       const newsRef = useRef<HTMLDivElement | null>(null);
 
     const redirect = useNavigate();
@@ -54,7 +52,8 @@ function Front() {
                 const transformedData : Banner[] = data.map((banner: any) => ({
                     id: banner.id,
                     image_path: banner.image_path.replace(/\\/g, '/'),
-                    news_id: banner.id_news
+                    news_id: banner.id_news,
+                    title: banner.title
                 }));
                 setSlideImages(transformedData);
 
@@ -78,8 +77,6 @@ function Front() {
 
             } catch (error: any) {
                 console.error("Error fetching data:", error.message);
-            } finally {
-                setLoading(false);
             }
         }
         fetchEverything();
@@ -88,10 +85,6 @@ function Front() {
     const timeConverter = (timestamp: number) => {
         const date = new Date(timestamp * 1000);
         return date.toLocaleString();
-    }
-
-    if (loading) {
-        return <LoadingPage />;
     }
 
 
@@ -130,13 +123,13 @@ function Front() {
                 </button>
             <section ref={newsRef} className='news-content'>
 
-            {news.map((news: NewsInterface, index: number) => {
+            {!news.length ? <LoadingSpinner/> : news.map((news: NewsInterface, index: number) => {
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
                 return (
                 <section className='news-item' key={index} onClick={() => redirect(`/news/${news.id}`)}
                 style= {{borderTop: `8px solid ${randomColor}`}}>
-                <img src={`${baseURL}${news.image_path}`} className='news-img'/>
+                <img src={`${baseURL}${news.image_path}`} className='news-img' loading='lazy'/>
                 <h2 className='news-title'>{news.title}</h2>
                 <h6 className='news-date'>{timeConverter(news.date)}</h6>
                 <section className='news-text-container'>
