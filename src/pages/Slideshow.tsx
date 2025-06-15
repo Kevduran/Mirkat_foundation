@@ -62,7 +62,7 @@ function Slideshow ({ slides }: SlideshowProps) {
                 <div>
                     {currentItem?.news_id ? ( <div 
                     className={`slide ${fade ? 'fade-in' : 'fade-out'}`}
-                    style={{ backgroundImage: `url(${baseURL}serve/${safeEncode(currentItem?.image_path)})`}}> 
+                    style={{ backgroundImage: `url(${baseURL}serve/${safeEncode(currentItem?.image_path)}?width=1920&quality=80)`}}> 
 
                         {currentItem?.title ? 
                         <div className="slide-overlay">

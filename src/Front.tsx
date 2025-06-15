@@ -7,20 +7,27 @@ import { useEffect, useState, useRef } from 'react';
 import { Banner } from './interfaces/banner'
 import LoadingSpinner from './utils/loadingSpinner'
 import { useNavigate } from 'react-router-dom'
-import { FaRobot, FaChild, FaLaptopCode } from 'react-icons/fa';
 
 interface NewsInterface {
     id: number,
     title: string,
     content: string,
-    date: number,
+    created_at: number,
     image_path: string,
+}
+
+type Achievements = {
+    id: number;
+    number: string;
+    content: string;
+    image_path: string;
 }
 
 function Front() {
     const [slideImages, setSlideImages] = useState<Banner[]>([]);
     const [news, setNews] = useState<NewsInterface[]>([]);
-      const newsRef = useRef<HTMLDivElement | null>(null);
+    const newsRef = useRef<HTMLDivElement | null>(null);
+    const [achievements, setAchievements] = useState<Achievements[]>([]);
 
     const redirect = useNavigate();
     const baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -49,13 +56,7 @@ function Front() {
                     },
                 });
                 const data = await response.json();
-                const transformedData : Banner[] = data.map((banner: any) => ({
-                    id: banner.id,
-                    image_path: banner.image_path,
-                    news_id: banner.id_news,
-                    title: banner.title
-                }));
-                setSlideImages(transformedData);
+                setSlideImages(data);
 
                 
                 // Fetching news
@@ -66,14 +67,24 @@ function Front() {
                     },
                 });
                 const data2 = await response2.json();
-                const transformedData2 = await data2.map((newsItem: any) => ({
-                    id: newsItem.id,
-                    title: newsItem.title,
-                    content: newsItem.content,
-                    date: newsItem.created_at,
-                    image_path: newsItem.image_path,
-                }));
-                setNews(transformedData2);
+                setNews(data2);
+
+                // Fetching achievements
+                await fetch(`${baseURL}achievements/get/all`, {
+                    method: "GET",
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                }).then(response => {
+                    return response.json();
+                }).then(data => {
+                    setAchievements(data.map((achievement: Achievements) => ({
+                        id: achievement.id,
+                        number: achievement.number,
+                        content: achievement.content,
+                        image_path: achievement.image_path.replace(/\\/g, '/')
+                    })));
+                })
 
             } catch (error: any) {
                 console.error("Error fetching data:", error.message);
@@ -97,25 +108,14 @@ function Front() {
         <Navbar/>
         {!slideImages.length ? <LoadingSpinner/> : <Slideshow slides={slideImages}/>}
         <div className="numbers-section">
-
         
-  <section className="numbers-element">
-    <FaRobot size={80} className="numbers-img" />
-    <h1 className="numbers-number">120+</h1>
-    <p className="numbers-description">Robots construidos por niños y niñas</p>
-  </section>
-
-  <section className="numbers-element">
-    <FaChild size={80} className="numbers-img" />
-    <h1 className="numbers-number">500+</h1>
-    <p className="numbers-description">Niños formados en pensamiento lógico</p>
-  </section>
-
-  <section className="numbers-element">
-    <FaLaptopCode size={80} className="numbers-img" />
-    <h1 className="numbers-number">75%</h1>
-    <p className="numbers-description">Aumento en habilidades digitales</p>
-  </section>
+        {!achievements ? <LoadingSpinner/> : achievements.map((achievement: Achievements) => (
+            <section className="numbers-element" key={achievement.id}>
+            <img alt='numbersimg' src={`${baseURL}${achievement.image_path}`} className="numbers-img" />
+            <h1 className="numbers-number">{achievement.number}</h1>
+            <p className="numbers-description">{achievement.content}</p>
+            </section>
+        ))}
 
         </div>
         <div className='news-section'>
@@ -133,9 +133,9 @@ function Front() {
                 return (
                 <section className='news-item' key={index} onClick={() => redirect(`/news/${news.id}`)}
                 style= {{borderTop: `8px solid ${randomColor}`}}>
-                <img src={`${baseURL}serve/${safeEncode(news.image_path)}`} className='news-img' loading='lazy'/>
+                <img src={`${baseURL}serve/${safeEncode(news.image_path)}?width=800&quality=60`} className='news-img' loading='lazy'/>
                 <h2 className='news-title'>{news.title}</h2>
-                <h6 className='news-date'>{timeConverter(news.date)}</h6>
+                <h6 className='news-date'>{timeConverter(news.created_at)}</h6>
                 <section className='news-text-container'>
                 {news.content
                 .split('/n/n')

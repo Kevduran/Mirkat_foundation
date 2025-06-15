@@ -11,6 +11,7 @@ type AchievementsProps = {
 
 type Achievement = {
     id: number;
+    number: string;
     content: string;
     image_path: string;
 }
@@ -23,6 +24,7 @@ function Achievements({showPopup, setIsLoading}: AchievementsProps) {
     const [file, setFile] = useState<FormData | null>(null);
     const [confirmation, setConfirmation] = useState<boolean>(false);
     const [itemId, setItemId] = useState<number>(0);
+    const [number, setNumber] = useState<string>("");
 
     const baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -35,11 +37,7 @@ function Achievements({showPopup, setIsLoading}: AchievementsProps) {
                 return;
             }
             const data = await res.json();
-            setAchievements(data.map((achievement: Achievement) => ({
-                id: achievement.id,
-                content: achievement.content,
-                image_path: achievement.image_path.replace(/\\/g, '/')
-            })))
+            setAchievements(data);
 
             setIsLoadingSpinner(false);
     }, []);
@@ -50,6 +48,10 @@ function Achievements({showPopup, setIsLoading}: AchievementsProps) {
 
     const handleContentChange = (e: React.ChangeEvent<HTMLInputElement>) : void => {
         setContent(e.target.value);
+    };
+
+    const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) : void => {
+        setNumber(e.target.value);
     };
 
         const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,6 +85,13 @@ function Achievements({showPopup, setIsLoading}: AchievementsProps) {
             return;
         }
 
+        if (!number) {
+            showPopup('El número del logro no puede estar vacío');
+            setIsLoading(false);
+            return;
+        }
+
+        file.append('number', number);
         file.append('content', content);
 
         const storedToken = Cookies.get('authToken');
@@ -102,6 +111,7 @@ function Achievements({showPopup, setIsLoading}: AchievementsProps) {
 
         setFile(null);
         setContent("");
+        setNumber("");
         setIsLoading(false);
         fetchAchievements();
         showPopup("Logro añadido correctamente");
@@ -146,7 +156,8 @@ function Achievements({showPopup, setIsLoading}: AchievementsProps) {
         <div className="achievements-editor">
             <h1 className="admin-titles">Edicion de zona de logros</h1>
             <form className="news-form" onSubmit={handleSubmit}>
-                <input type="text" className='news-input' placeholder="Texto que contendrá el logro" onChange={handleContentChange}></input>
+                <input type="text" className="news-input" placeholder="Número para remarcar el logro" onChange={handleNumberChange}></input>
+                <input type="text" className='news-input' placeholder="Detalles que contendrá el logro" onChange={handleContentChange}></input>
                 <label className='anotations'>Se recomienda subir imágenes PNG o SVG</label>
                 <input type="file" className='file-input' placeholder='Imagen de la noticia' onChange={handleUpload}></input>
                 <button type="submit" className='upload-button'>Añadir logro</button>
@@ -158,6 +169,7 @@ function Achievements({showPopup, setIsLoading}: AchievementsProps) {
                 return (
                     <div className="achievement-item" key={achievement.id}>
                         <img src={`${baseURL}${achievement.image_path}`} className="achievement-img"/>
+                        <h1 className="achievement-number">{achievement.number}</h1>
                         <h1 className="achievement-content">{achievement.content}</h1>
                         <button className='delete-button' onClick={() => handleDelete(achievement?.id)}>Eliminar</button>
                     </div>

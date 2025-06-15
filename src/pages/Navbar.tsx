@@ -1,4 +1,4 @@
-import { MdOutlineLogin, MdKeyboardArrowDown, MdMenu } from "react-icons/md";
+import { MdOutlineLogin, MdMenu } from "react-icons/md";
 import MirkatLogo from '../assets/MIRKAT_Logo-01.png'
 import { Link , useNavigate } from "react-router-dom";
 import { useState } from "react";
