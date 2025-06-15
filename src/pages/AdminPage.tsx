@@ -9,6 +9,7 @@ import News from './News';
 import ConfirmationDialog from '../utils/ConfirmationDialog';
 import PopupMessage from '../utils/PopupMessage';
 import LoadingSpinner from '../utils/loadingSpinner';
+import Achievements from './Achievements';
 
 function AdminPage() {
 
@@ -54,7 +55,7 @@ function AdminPage() {
     });
     const bannersData = await bannersRes.json();
     bannersData.forEach((banner: any) => {
-      setBanners((prevBanners) => [...prevBanners, { id: banner.id, image_path: banner.image_path.replace(/\\/g, '/'), news_id: banner.id_news }]);
+      setBanners((prevBanners) => [...prevBanners, { id: banner.id, image_path: banner.image_path.replace(/\\/g, '/'), news_id: banner.id_news, title: banner.title }]);
     });
     setIsLoadingSpinner(false);
 
@@ -245,6 +246,8 @@ function AdminPage() {
                               onConfirm={handleConfirmationDelete} 
                               title="Confirmación" 
                               message="¿Estás seguro de que deseas eliminar este banner?" /> : null}
+      
+      <Achievements showPopup={showPopup} setIsLoading={setIsLoading}/>
       
     </div>
 
